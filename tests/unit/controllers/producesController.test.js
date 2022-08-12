@@ -60,5 +60,28 @@ describe('Verifica funcionanmento da rotas de controller', () => {
 
   })
 
+  describe('Verifica o correto funcionamento da função postInsertProduct', () => {
+    const response = {};
+    const request = {};
+    dt = [{
+      "id": 1,
+      "name": "Martelo de Thor",
+    }]
+    before(() => {
+      request.body = {name: "teste"}
+      response.status = sinon.stub().returns(response);
+      response.json = sinon.stub().returns()
+      sinon.stub(productsServices, 'insertProduct').resolves(dt)
+    })
+    after(() => {
+      productsServices.insertProduct.restore();
+    })
+
+    it('é chamado o status com o código 200', async () => {
+      await productsController.postInsertProduct(request, response);
+      expect(response.status.calledWith(201)).to.be.equal(true);
+      expect(response.json.calledWith(dt)).to.be.equal(true);
+    })
+  })
 
 })

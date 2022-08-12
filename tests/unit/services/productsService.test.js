@@ -2,6 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 const Products = require('../../../models/Products');
 const productsService = require('../../../services/products.service');
+const CustomError = require('../../../errors/customError')
 
 describe('Testa a camada de service da rota products', () => {
   describe('quando é requisitado todos os produtos através da função "getProductsAll"', () => {
@@ -45,12 +46,35 @@ describe('Testa a camada de service da rota products', () => {
       })
 
       it('deve retornar um erro 404 com a a messagem Product not found', async() => {
-        expect(await Products.getProductsAll()).to.have.throw;
+        // expect(await productsService.getProductsAll()).to.have.throw(new CustomError(404, "Product not found"));
 
       })
 
     })
 
   })
+
+  describe('quando é inserido um novo produto através da função "insertProduct"', () => {
+    before(() => {
+      response = {
+        id: 1,
+        name:"teste"
+      };
+      sinon.stub(Products, 'insertProduct').resolves(response)
+    })
+    after(() => {
+      Products.insertProduct.restore();
+    })
+
+    it('retorna um objeto com o id  e nome do produto', async () => {
+      const response = await productsService.insertProduct('teste');
+      expect(response).to.deep.equal({
+        id: 1,
+        name: "teste"
+      })
+    })
+
+  })
+
 
 })
