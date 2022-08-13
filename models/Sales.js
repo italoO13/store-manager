@@ -15,7 +15,6 @@ const insertSalesProducts = async ({ productId, quantity }, id) => {
 };
 
 const insertSales = async (sales) => {
-  try {
     const existsProduct = await Promise.all(sales.map(validateExistsProduct));
   
     if (existsProduct.includes(true)) {
@@ -25,16 +24,15 @@ const insertSales = async (sales) => {
     const [response] = await connection.execute('INSERT INTO StoreManager.sales VALUES()');
   
     await sales.map((obj) => insertSalesProducts(obj, response.insertId));
-  
+    console.log('entrou aqui');
     return {
       id: response.insertId,
       itemsSold: sales,
     };
-  } catch (error) {
-    console.log(error.message);
-  }
 };
 
 module.exports = {
   insertSales,
+  validateExistsProduct,
+  insertSalesProducts,
 };
