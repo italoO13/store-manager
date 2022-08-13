@@ -51,7 +51,6 @@ describe('Testa a camada de service da rota products', () => {
       })
 
     })
-
   })
 
   describe('quando é inserido um novo produto através da função "insertProduct"', () => {
