@@ -8,6 +8,24 @@ const insertSales = async (sales) => {
   return response;
 };
 
+const getSalesAll = async () => {
+  const response = await Sales.getSalesAll();
+  if (response === false) {
+    return false;
+  }
+  return response;
+};
+
+const getSalesById = async (id) => {
+  const response = await Sales.getSalesById(id);
+  if (response === false) {
+    return false;
+  }
+  return response;
+};
+
 module.exports = {
   insertSales,
+  getSalesAll,
+  getSalesById,
 };

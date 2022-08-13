@@ -31,8 +31,40 @@ const insertSales = async (sales) => {
     };
 };
 
+const getSalesAll = async () => {
+  const [response] = await connection.execute(
+    `SELECT sp.sale_id AS 'saleId', s.date, sp.product_id AS 'productId', sp.quantity 
+        FROM StoreManager.sales_products AS sp
+        INNER JOIN StoreManager.sales AS s
+        ON sp.sale_id = s.id
+        ORDER BY sp.sale_id, sp.product_id`,
+);
+  if (!response.length) {
+    return false;
+  }
+  return response;
+};
+
+const getSalesById = async (id) => {
+  const [response] = await connection.execute(
+    `SELECT s.date, sp.product_id AS 'productId', sp.quantity 
+        FROM StoreManager.sales_products AS sp
+        INNER JOIN StoreManager.sales AS s
+        ON sp.sale_id = s.id
+        WHERE sp.sale_id = ?
+        ORDER BY sp.sale_id, sp.product_id`, [id],
+  );
+  if (!response.length) {
+    return false;
+  }
+  console.log(response);
+  return response;
+};
+
 module.exports = {
   insertSales,
   validateExistsProduct,
   insertSalesProducts,
+  getSalesAll,
+  getSalesById,
 };
