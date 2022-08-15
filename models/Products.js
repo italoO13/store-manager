@@ -34,7 +34,6 @@ const updateProduct = async (prod) => {
     WHERE id = ?
   `;
   const [response] = await connection.execute(query, [prod.name, prod.id]);
-  console.log(response);
   if (!response.affectedRows) {
     return false;
   }
