@@ -21,9 +21,18 @@ const insertProduct = async (name) => {
   const response = await Products.insertProduct(name);
   return response;
 };
+
+const updateProduct = async (name, id) => {
+  const response = await Products.updateProduct({ name, id });
+  if (!response) {
+    return false;
+  }
+  return response;
+};
  
 module.exports = {
   getProductsAll,
   getProductById,
   insertProduct,
+  updateProduct,
 };
