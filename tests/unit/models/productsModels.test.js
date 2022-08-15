@@ -127,7 +127,100 @@ describe('Testa a camada de models da rota products', () => {
     })
   });
 
+  describe('Quando é feito uma requisição para um novo produto através da função "updateProduct"', () => {
+    describe('Quando é executado corretamente', () => {
+      const mockUpdateProd = { name: "teste", id: 1 }
+      
+      before(() => {
+        const response = {
+          "affectedRows": 1
+        };
+        sinon.stub(connection, 'execute').resolves([response])
+      })
+      after(() => {
+        connection.execute.restore();
+      })
+  
+      it('deve retornar um boolean', async () => {
+        const response = await Products.updateProduct(mockUpdateProd);
+        expect(response).to.be.an('boolean');
+      })
+  
+      it('deve retornar um boolean true', async () => {
+        const response = await Products.updateProduct(mockUpdateProd);
+        expect(response).to.be.equal(true)
+      })
 
+
+    });
+    
+
+    describe('se não encontrar nenhum produto', () => {
+      const mockUpdateFalse = { name: 'teste', id: 888 }
+      before(() => {
+        const response = {
+          "affectedRows": 0
+        };
+        sinon.stub(connection, 'execute').resolves([response])
+      })
+      after(() => {
+        connection.execute.restore();
+      })
+
+      it('deve retornar false', async () => {
+        const response = await Products.updateProduct(mockUpdateFalse);
+        expect(response).to.be.equal(false);
+      })
+    })
+
+  });
+
+
+  describe('Quando é feito uma requisição para um novo produto através da função "deleteProduct"', () => {
+    describe('Quando é executado corretamente', () => {
+
+      before(() => {
+        const response = {
+          "affectedRows": 1
+        };
+        sinon.stub(connection, 'execute').resolves([response])
+      })
+      after(() => {
+        connection.execute.restore();
+      })
+
+      it('deve retornar um boolean', async () => {
+        const response = await Products.deleteProduct();
+        expect(response).to.be.an('boolean');
+      })
+
+      it('deve retornar um boolean true', async () => {
+        const response = await Products.deleteProduct();
+        expect(response).to.be.equal(true)
+      })
+
+
+    });
+
+
+    describe('se não encontrar nenhum produto', () => {
+      before(() => {
+        const response = {
+          "affectedRows": 0
+        };
+        sinon.stub(connection, 'execute').resolves([response])
+      })
+      after(() => {
+        connection.execute.restore();
+      })
+
+      it('deve retornar false', async () => {
+        const response = await Products.deleteProduct();
+        expect(response).to.be.equal(false);
+      })
+    })
+
+  });
 
 
 

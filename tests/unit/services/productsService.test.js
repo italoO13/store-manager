@@ -75,5 +75,77 @@ describe('Testa a camada de service da rota products', () => {
 
   })
 
+  describe('quando é inserido um novo produto através da função "updateProduct"', () => {
+    
+    describe('se funcionar corretamente', () => {
+      
+      before(() => {
+        sinon.stub(Products, 'updateProduct').resolves(true)
+      })
+      after(() => {
+        Products.updateProduct.restore();
+      })
+  
+      it('retorna um objeto com o id  e nome do produto', async () => {
+        const response = await productsService.updateProduct();
+        expect(response).to.deep.equal(true)
+      })
+  
+    })
+
+    describe('se não funcionar corretamente', () => {
+
+      before(() => {
+        sinon.stub(Products, 'updateProduct').resolves(false)
+      })
+      after(() => {
+        Products.updateProduct.restore();
+      })
+
+      it('retorna um objeto com o id  e nome do produto', async () => {
+        const response = await productsService.updateProduct();
+        expect(response).to.deep.equal(false)
+      })
+
+    })
+
+    })
+    
+  describe('quando é inserido um novo produto através da função "deleteProduct"', () => {
+
+    describe('se funcionar corretamente', () => {
+
+      before(() => {
+        sinon.stub(Products, 'deleteProduct').resolves(true)
+      })
+      after(() => {
+        Products.deleteProduct.restore();
+      })
+
+      it('retorna um objeto com o id  e nome do produto', async () => {
+        const response = await productsService.deleteProduct();
+        expect(response).to.deep.equal(true)
+      })
+
+    })
+
+    describe('se não funcionar corretamente', () => {
+
+      before(() => {
+        sinon.stub(Products, 'deleteProduct').resolves(false)
+      })
+      after(() => {
+        Products.deleteProduct.restore();
+      })
+
+      it('retorna um objeto com o id  e nome do produto', async () => {
+        const response = await productsService.deleteProduct();
+        expect(response).to.deep.equal(false)
+      })
+
+    })
+
+  })
+
 
 })
