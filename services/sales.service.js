@@ -24,8 +24,17 @@ const getSalesById = async (id) => {
   return response;
 };
 
+const deleteSales = async (id) => {
+  const response = await Sales.deleteSales(id);
+  if (response === false) {
+    return false;
+  }
+  return response;
+};
+
 module.exports = {
   insertSales,
   getSalesAll,
   getSalesById,
+  deleteSales,
 };

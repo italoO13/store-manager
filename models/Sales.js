@@ -59,10 +59,40 @@ const getSalesById = async (id) => {
   return response;
 };
 
+// const updateSales = async (prod) => {
+//   const query = `UPDATE StoreManager.products
+//     SET name = ?
+//     WHERE id = ?
+//   `;
+//   const [response] = await connection.execute(query, [prod.name, prod.id]);
+//   if (!response.affectedRows) {
+//     return false;
+//   }
+//   return true;
+// };
+
+const deleteSales = async (id) => {
+  const queryDelSalesProd = `DELETE FROM StoreManager.sales_products
+  WHERE sale_id = ?
+  `;
+  const queryDelSales = `DELETE FROM StoreManager.sales
+  WHERE id = ?
+  `;
+  await connection.execute(queryDelSalesProd, [id]);
+
+  const [response] = await connection.execute(queryDelSales, [id]);
+
+  if (!response.affectedRows) {
+    return false;
+  }
+  return true;
+};
+
 module.exports = {
   insertSales,
   validateExistsProduct,
   insertSalesProducts,
   getSalesAll,
   getSalesById,
+  deleteSales,
 };
