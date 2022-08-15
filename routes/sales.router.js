@@ -5,7 +5,7 @@ const { insertValidator } = require('../middlewares/sales.validators');
 const router = express.Router();
 
 router.post('/', insertValidator, salesController.insertSales);
-router.get('/', salesController.getProductsAll);
-router.get('/:id', salesController.getProductById);
+router.get('/', salesController.getSalesAll);
+router.get('/:id', salesController.getSalesById);
 
 module.exports = router;

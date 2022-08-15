@@ -8,7 +8,7 @@ const insertSales = async (req, res, _next) => {
   res.status(201).json(response);
 };
 
-const getProductsAll = async (req, res, _next) => {
+const getSalesAll = async (req, res, _next) => {
   const response = await salesServices.getSalesAll();
   if (response === false) {
     return res.status(404).json({ message: 'Sale not found' });
@@ -16,7 +16,7 @@ const getProductsAll = async (req, res, _next) => {
   res.status(200).json(response);
 };
 
-const getProductById = async (req, res, _next) => {
+const getSalesById = async (req, res, _next) => {
   const { id } = req.params;
   const response = await salesServices.getSalesById(id);
   if (response === false) {
@@ -27,6 +27,6 @@ const getProductById = async (req, res, _next) => {
 
 module.exports = {
   insertSales,
-  getProductsAll,
-  getProductById,
+  getSalesAll,
+  getSalesById,
 };

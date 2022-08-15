@@ -24,7 +24,6 @@ const insertSales = async (sales) => {
     const [response] = await connection.execute('INSERT INTO StoreManager.sales VALUES()');
   
     await sales.map((obj) => insertSalesProducts(obj, response.insertId));
-    console.log('entrou aqui');
     return {
       id: response.insertId,
       itemsSold: sales,
@@ -57,7 +56,6 @@ const getSalesById = async (id) => {
   if (!response.length) {
     return false;
   }
-  console.log(response);
   return response;
 };
 
