@@ -17,6 +17,11 @@ const getProductById = async (id) => {
   return response;
 };
 
+const getSearchTerm = async (term) => {
+  const response = await Products.getSearchTerm(term);
+  return response;
+};
+
 const insertProduct = async (name) => {
   const response = await Products.insertProduct(name);
   return response;
@@ -44,4 +49,5 @@ module.exports = {
   insertProduct,
   updateProduct,
   deleteProduct,
+  getSearchTerm,
 };
