@@ -32,9 +32,15 @@ const deleteSales = async (id) => {
   return response;
 };
 
+const updateSales = async (sales, id) => {
+  const response = await Sales.updateSales(sales, id);
+  return response;
+};
+
 module.exports = {
   insertSales,
   getSalesAll,
   getSalesById,
   deleteSales,
+  updateSales,
 };
