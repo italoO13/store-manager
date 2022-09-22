@@ -1,4 +1,4 @@
-# Blog API
+# Store Manager
 
 API para uma loja de comércio eletrônico com endpoints de produtos e vendas utilizando:
   - Nodejs
