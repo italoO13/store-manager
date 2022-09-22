@@ -1,54 +1,55 @@
-<h1 align="center">
-     <a href="#" alt="site de despesa"> Projeto Store manager</a>
-</h1>
+# Blog API
 
-<h3 align="center">
-   API para E-commerce utilizando Node, Express, MySQL e Docker. Seguindo os padrões REST para contrução de API utilizando como arquitetura de software o modelo MSC.
-</h3>
+API para uma loja de comércio eletrônico com endpoints de produtos e vendas utilizando:
+  - Nodejs
+  - Express
+  - Docker e MySQL
+  - Padrão REST com arquitetura MSC.
+  -75% de cobertura de testes unitários com Mocha, chai e Sinnon
 
-<h4 align="center">
-	🚧   Concluído 🚀 🚧
-</h4>
+Para executar localmente, clone o repositório e execute os seguintes comandos:
 
-Tabela de conteúdos
-=================
-<!--ts-->
-   * [Sobre o projeto](#-sobre-o-projeto)
-   * [Funcionalidades](#-funcionalidades)
-   * [Layout](#-layout)
-   * [Tecnologias](#-tecnologias)
-  * [Lições Aprendidas](#-LiçõesAprendidas)
+```
+$ docker-compose up -d
+$ docker exec -it store_manager bash
+$ npm run migration
+$ npm start
+$ npm run test:mocha
+```
 
+### Metodos de Produto
 
-<!--te-->
+|Methodo|Rota|Descrição|
+| ------ | ------ | ----- |
+|get|/products|Retorna todos os produtos|
+|get|/products/search?q=|Retorna os produtos que contenham a palavra pesquisada|
+|get|/products/:id|Retorna um único produto a partir do id|
+|post|/products|Cria um novo produto|
+|put|/products/:id|Edita um produto a partir do id|
+|delete|/products/:id|Apaga um produto a partir do id|
 
+Formato de requisição para o POST e PUT:
+```
+{
+  "name": "Pruduct"
+}
+```
 
-## 💻 Sobre o projeto
+### Metodos de Vendas
 
-Este projeto teve como objetivo criar uma API para um comércio eletrônico com as rotas de produtos e vendas. 
+|Methodo|Rota|Descrição|
+| ------ | ------ | ----- |
+|get|/sales|Retorna todas as vendas|
+|get|/sales/:id|Retorna uma única venda a partir do id|
+|post|/sales|Cria uma nova venda|
+|put|/sales/:id|Edita uma venda a partir do id|
+|delete|/sales/:id|Apaga uma venda a partir do id|
 
+Formato de requisição para o POST e PUT:
+```
+[
+  {"productId": "1", "quantity": "3"}, 
+  {"productId": "3", "quantity": "5"}
+]
 
----
-
-## ⚙️ Funcionalidades
-
-- [x] Em construção
-
----
-
-## 🎨 Layout
-
----
-
-## 🛠 Tecnologias
-
-As seguintes ferramentas foram usadas na construção do projeto:
-
--   **Node**
--   **Express**
--   **MySQL**
--   **Mocha**
--   **Chai**
--   **Sinon**
-
----
+```
